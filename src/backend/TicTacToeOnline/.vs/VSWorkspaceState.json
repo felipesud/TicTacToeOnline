@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
-    "\\Data",
-    "\\Models"
+    "\\Controllers"
   ],
-  "SelectedNode": "\\Data\\GameContext.cs",
+  "SelectedNode": "\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }
