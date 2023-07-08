@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using TicTacToeOnline.Data;
 using TicTacToeOnline.Models;
 
 namespace TicTacToeOnline.Controllers
@@ -10,7 +10,12 @@ namespace TicTacToeOnline.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private static List<Game> games = new List<Game>();
+        private readonly GameContext _context;
+
+        public GameController(GameContext context)
+        {
+            _context = context;
+        }
 
         [HttpPost("new")]
         public ActionResult<string> NewGame()
@@ -22,7 +27,9 @@ namespace TicTacToeOnline.Controllers
                 Board = new char[3, 3],
                 CurrentPlayer = 'X'
             };
-            games.Add(game);
+
+            _context.Games.Add(game);
+            _context.SaveChanges();
 
             return Ok(gameId);
         }
@@ -34,7 +41,7 @@ namespace TicTacToeOnline.Controllers
 
         private Game GetGameById(string gameId)
         {
-            return games.FirstOrDefault(game => game.Id == gameId);
+            return _context.Games.FirstOrDefault(game => game.Id == gameId);
         }
 
         private bool IsValidMove(Game game, Move move)
@@ -149,6 +156,8 @@ namespace TicTacToeOnline.Controllers
 
             var gameResult = GetGameResult(game);
             var gameBoardAsString = GetGameBoardAsString(game.Board);
+
+            _context.SaveChanges();
 
             return Ok(new { Result = gameResult, Board = gameBoardAsString });
         }
