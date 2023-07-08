@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\workspace\\TicTacToeOnline\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj": {}
+    "C:\\workspace\\TicTacToeOnline\\src\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj": {}
   },
   "projects": {
-    "C:\\workspace\\TicTacToeOnline\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj": {
+    "C:\\workspace\\TicTacToeOnline\\src\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\workspace\\TicTacToeOnline\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj",
+        "projectUniqueName": "C:\\workspace\\TicTacToeOnline\\src\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj",
         "projectName": "TicTacToeOnline",
-        "projectPath": "C:\\workspace\\TicTacToeOnline\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj",
+        "projectPath": "C:\\workspace\\TicTacToeOnline\\src\\backend\\TicTacToeOnline\\TicTacToeOnline.csproj",
         "packagesPath": "C:\\Users\\sud_s\\.nuget\\packages\\",
-        "outputPath": "C:\\workspace\\TicTacToeOnline\\backend\\TicTacToeOnline\\obj\\",
+        "outputPath": "C:\\workspace\\TicTacToeOnline\\src\\backend\\TicTacToeOnline\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,46 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
