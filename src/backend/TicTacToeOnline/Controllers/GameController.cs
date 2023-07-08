@@ -1,4 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TicTacToeOnline.Models;
 
 namespace TicTacToeOnline.Controllers
 {
@@ -28,12 +32,106 @@ namespace TicTacToeOnline.Controllers
             return Guid.NewGuid().ToString();
         }
 
-
         private Game GetGameById(string gameId)
         {
             return games.FirstOrDefault(game => game.Id == gameId);
         }
 
+        private bool IsValidMove(Game game, Move move)
+        {
+            return move != null && move.Row >= 0 && move.Row < 3 && move.Column >= 0 && move.Column < 3 && game != null && game.Board[move.Row, move.Column] == '\0';
+        }
+
+        private string GetGameResult(Game game)
+        {
+            if (CheckForWinner(game, 'X'))
+            {
+                return "Vitória do Jogador X";
+            }
+            else if (CheckForWinner(game, 'O'))
+            {
+                return "Vitória do Jogador O";
+            }
+            else if (IsBoardFull(game))
+            {
+                return "Empate";
+            }
+            else
+            {
+                return "Jogo em andamento";
+            }
+        }
+
+        private bool CheckForWinner(Game game, char player)
+        {
+            if (game == null || game.Board == null)
+            {
+                return false;
+            }
+
+            int boardLength = game.Board.GetLength(0);
+            for (int row = 0; row < boardLength; row++)
+            {
+                if (game.Board[row, 0] == player && game.Board[row, 1] == player && game.Board[row, 2] == player)
+                {
+                    return true;
+                }
+            }
+
+            for (int col = 0; col < boardLength; col++)
+            {
+                if (game.Board[0, col] == player && game.Board[1, col] == player && game.Board[2, col] == player)
+                {
+                    return true;
+                }
+            }
+
+            if (game.Board[0, 0] == player && game.Board[1, 1] == player && game.Board[2, 2] == player)
+            {
+                return true;
+            }
+
+            if (game.Board[2, 0] == player && game.Board[1, 1] == player && game.Board[0, 2] == player)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        private bool IsBoardFull(Game game)
+        {
+            if (game == null || game.Board == null)
+            {
+                return false;
+            }
+
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    if (game.Board[row, col] == '\0')
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private string GetGameBoardAsString(char[,] board)
+        {
+            string boardString = "";
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    boardString += board[row, col].ToString();
+                }
+            }
+            return boardString;
+        }
 
         [HttpPost("{gameId}/move")]
         public ActionResult MakeMove(string gameId, [FromBody] Move move)
@@ -50,8 +148,9 @@ namespace TicTacToeOnline.Controllers
             game.Board[move.Row, move.Column] = game.CurrentPlayer;
 
             var gameResult = GetGameResult(game);
-            
-            return Ok(gameResult);
+            var gameBoardAsString = GetGameBoardAsString(game.Board);
+
+            return Ok(new { Result = gameResult, Board = gameBoardAsString });
         }
     }
 }
