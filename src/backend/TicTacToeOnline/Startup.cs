@@ -31,10 +31,12 @@ namespace TicTacToeOnline
             });
 
             services.AddDbContext<GameContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly("TicTacToeOnline")));
 
             services.AddControllers();
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

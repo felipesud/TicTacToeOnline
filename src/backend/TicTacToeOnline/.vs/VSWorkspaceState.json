@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Controllers",
-    "\\Data",
-    "\\Models"
+    ""
   ],
-  "SelectedNode": "\\Data\\GameContext.cs",
+  "SelectedNode": "\\TicTacToeOnline.sln",
   "PreviewInSolutionExplorer": false
 }
